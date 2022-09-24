@@ -18,6 +18,6 @@ jobs:
         with:
           node-version: '16.15.1'
       - run: npm install -g vsce
-      - run: cd jardis-client
       - run: ls
+        working-directory: jardis-client
       - run: vsce --version
