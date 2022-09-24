@@ -10,3 +10,12 @@ jobs:
           node-version: '16.15.1'
       - run: npm install -g bats
       - run: bats -v
+  check-vsce-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.15.1'
+      - run: npm install -g vsce
+      - run: vsce -v
