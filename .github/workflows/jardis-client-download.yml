@@ -1,0 +1,28 @@
+name: Download jardis client
+on: workflow_dispatch
+jobs:
+  deploy-jardis-client:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get tag or commmit id
+        uses: tenhaus/get-release-or-tag@v2
+        id: getTag
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.15.1'
+      - name: Install NPM dependencies    
+        run: |
+          npm install vsce -g
+          npm install
+        working-directory: jardis-client
+      - name: Packaging jardis client
+        run: vsce package -o jardis-client-${{steps.getTag.outputs.tag}}.vsix
+        working-directory: jardis-client
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: jardis-client
+          path: jardis-client/*.vsix
+
+          
