@@ -1,15 +1,15 @@
 name: learn-github-actions
 on: [push]
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16.15.1'
-      - run: npm install -g bats
-      - run: bats -v
+  # check-bats-version:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '16.15.1'
+  #     - run: npm install -g bats
+  #     - run: bats -v
   check-vsce-version:
     runs-on: ubuntu-latest
     steps:
@@ -18,4 +18,5 @@ jobs:
         with:
           node-version: '16.15.1'
       - run: npm install -g vsce
+      - run: ls
       - run: vsce --version
