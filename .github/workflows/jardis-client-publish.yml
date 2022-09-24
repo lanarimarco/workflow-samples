@@ -1,7 +1,7 @@
 name: Publish Jardis Client
 on:
   release:
-    types: [published]
+    types: [released]
 jobs:
   deploy-jardis-client:
     runs-on: ubuntu-latest
