@@ -6,6 +6,9 @@ jobs:
   deploy-jardis-client:
     runs-on: ubuntu-latest
     steps:
+      - name: Get tag
+        id: getTag
+        uses: dawidd6/action-get-tag@v1
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -16,20 +19,8 @@ jobs:
           npm install
         working-directory: jardis-client
       - name: Packaging jardis client
-        run: vsce package
+        run: vsce package -o jardis-client-${{steps.getTag.outputs.tag}}.vsix
         working-directory: jardis-client
-      - name: Copy package to artifacts
-        run: |
-          cp jardis-client/*.vsix ./artifacts
-          ls ./artifacts
-      # - name: Upload Artifact
-      #   uses: actions/upload-artifact@v2
-      #   with: 
-      #     name: jardis-client
-      #     path: ./artifacts
-      - name: Get tag
-        id: getTag
-        uses: dawidd6/action-get-tag@v1
       - name: Upload Artifact
         uses: AButler/upload-release-assets@v2.0
         with:
