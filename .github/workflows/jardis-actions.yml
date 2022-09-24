@@ -1,29 +1,28 @@
-name: learn-github-actions
+name: jardis-actions
 on: [push]
 jobs:
-  vsce-package:
+  deploy-jardis-client:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16.15.1'
-      - run: npm install -g vsce
-      - name: Install jardis client requirement
-        run: npm install
+      - name: Install NPM dependencies    
+      - run: |
+          npm install vsce
+          npm install
         working-directory: jardis-client
-      - name: Creating artifacts dir
-        run: mkdir ./artifacts
       - name: Packaging jardis client
         run: vsce package
         working-directory: jardis-client
-      - name: Copy extension to artifacts
+      - name: Copy package to artifacts
         run: |
           cp jardis-client/*.vsix ./artifacts
           ls ./artifacts
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with: 
-          name: assets-for-download
+          name: jardis-client
           path: ./artifacts
           
