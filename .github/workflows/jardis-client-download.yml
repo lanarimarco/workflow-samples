@@ -1,5 +1,7 @@
 name: Download jardis client
-on: workflow_dispatch
+on: 
+  workflow_dispatch:
+  push:
 jobs:
   deploy-jardis-client:
     runs-on: ubuntu-latest
