@@ -21,4 +21,9 @@ jobs:
         run: |
           cp jardis-client/*.vsix ./artifacts
           ls ./artifacts
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with: 
+          name: assets-for-download
+          path: ./artifacts
           
