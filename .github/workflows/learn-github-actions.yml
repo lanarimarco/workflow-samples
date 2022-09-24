@@ -18,5 +18,7 @@ jobs:
         run: vsce package
         working-directory: jardis-client
       - name: Copy extension to artifacts
-        run: cp jardis-client/*.vsix ./artifacts
+        run: 
+          cp jardis-client/*.vsix ./artifacts
+          ls ./artifacts
           
