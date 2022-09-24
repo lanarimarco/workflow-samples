@@ -20,9 +20,14 @@ jobs:
         run: |
           cp jardis-client/*.vsix ./artifacts
           ls ./artifacts
+      # - name: Upload Artifact
+      #   uses: actions/upload-artifact@v2
+      #   with: 
+      #     name: jardis-client
+      #     path: ./artifacts
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
-        with: 
-          name: jardis-client
-          path: ./artifacts
+        uses: AButler/upload-release-assets@v2.0
+        with:
+          files: jardis-client/*.vsix
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
           
