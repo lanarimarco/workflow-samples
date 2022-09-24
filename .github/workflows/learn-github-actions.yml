@@ -9,9 +9,13 @@ jobs:
         with:
           node-version: '16.15.1'
       - run: npm install -g vsce
-      # - run: ls
-      #   working-directory: jardis-client
-      - run: npm install
+      - name: Install jardis client requirement
+        run: npm install
         working-directory: jardis-client
-      - run: vsce package
+      - name: Creating artifacts dir
+        run: mkdir ./artifacts
+      - name: Packaging jardis client
+        run: 
+          vsce package
+          cp *.vsix ./artifacts
         working-directory: jardis-client
