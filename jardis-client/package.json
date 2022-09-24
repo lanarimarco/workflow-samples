@@ -1,0 +1,257 @@
+{
+	"name": "jardis-client",
+	"displayName": "Jardis client",
+	"description": "Jardis client for SmeUP Open Architecture",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.57.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onLanguage:rpgle",
+		"onCommand:jardis.connect",
+		"onCommand:jardis.configuration"
+	],
+	"main": "./out/extension.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/smeup/jardis.git",
+		"directory": "jardis-client"
+	},
+	"contributes": {
+		"languages": [
+			{
+				"id": "rpgle",
+				"aliases": [
+					"RPGLE"
+				],
+				"extensions": [
+					".rpgle", "api", "tab"
+				]
+			}
+		],
+		"commands": [
+			{
+				"command": "jardis.connect",
+				"title": "Connect",
+				"category": "Jardis"
+			},
+			{
+				"command": "jardis.configuration",
+				"title": "Configuration",
+				"category": "Jardis"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Jardis",
+			"properties": {
+				"jardis.user": {
+					"order": 10,
+					"scope": "resource",
+					"type": "string",
+					"description": "User name"
+				},
+				"jardis.password": {
+					"order": 20,
+					"scope": "resource",
+					"type": "string",
+					"description": "Password"
+				},
+				"jardis.host": {
+					"order": 30,
+					"scope": "resource",
+					"type": "string",
+					"description": "Server"
+				},
+				"jardis.port": {
+					"order": 40,
+					"scope": "resource",
+					"type": "number",
+					"default": 9091,
+					"description": "Port"
+				},
+				"jardis.env": {
+					"order": 50,
+					"scope": "resource",
+					"type": "string",
+					"description": "Name"
+				},
+				"jardis.enableBackgroundIndexing": {
+					"order": 60,
+					"scope": "resource",
+					"type": "boolean",
+					"default": true,
+					"description": "Enable rpgle background indexing"
+				},
+				"jardis.backgroundIndexingFilePattern": {
+					"order": 70,
+					"scope": "resource",
+					"type": "string",
+					"default": "*",
+					"description": "Files matching this pattern will be automaticallly scanned"
+				},
+				"jardis.checkSyntaxOfProgramsIncludingCopyOnCopyChanged": {
+					"order": 80,
+					"scope": "resource",
+					"type": "boolean",
+					"default": true,
+					"description": "Enable syntax checking for all programs including the copy in every case where a copy changes"
+				},
+				"jardis.trace.server": {
+					"order": 90,
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VS Code and the language server."
+				}
+			}
+		},
+		"breakpoints": [
+			{
+				"language": "rpgle"
+			}
+		],
+		"debuggers": [
+			{
+				"type": "jardis",
+				"languages": [
+					"rpgle"
+				],
+				"label": "Jardis Debug",
+				"configurationAttributes": {
+					"launch": {
+						"required": [
+							"program"
+						],
+						"properties": {
+							"program": {
+								"type": "string",
+								"description": "Absolute path to a text file.",
+								"default": "${file}"
+							},
+							"workspaceFolders": {
+								"type": "string",
+								"description": "Workspace folders",
+								"default": "${command.jardis.workspaceFolders}"
+							},
+							"env": {
+								"type": "string",
+								"description": "Environment",
+								"default": "${config:jardis.env}"
+							},
+							"user": {
+								"type": "string",
+								"description": "User",
+								"default": "${config:jardis.user}"
+							},
+							"password": {
+								"type": "string",
+								"description": "Password",
+								"default": "${config:jardis.password}"
+							},
+							"osUser": {
+								"type": "string",
+								"description": "OS User",
+								"default": "${command:jardis.osUser}"
+							}
+						}
+					},
+					"attach": {
+						"required": [
+							"program"
+						],
+						"properties": {
+							"program": {
+								"type": "string",
+								"description": "Absolute path to a text file.",
+								"default": "${file}"
+							},
+							"workspaceFolders": {
+								"type": "string",
+								"description": "Workspace folders",
+								"default": "${command.jardis.workspaceFolders}"
+							},
+							"env": {
+								"type": "string",
+								"description": "Environment",
+								"default": "${config:jardis.env}"
+							},
+							"user": {
+								"type": "string",
+								"description": "User",
+								"default": "${config:jardis.user}"
+							},
+							"password": {
+								"type": "string",
+								"description": "Password",
+								"default": "${config:jardis.password}"
+							},
+							"osUser": {
+								"type": "string",
+								"description": "OS User",
+								"default": "${command:jardis.osUser}"
+							}
+						}
+					}
+				},
+				"initialConfigurations": [
+					{
+						"type": "jardis",
+						"request": "launch",
+						"name": "Jardis run",
+						"program": "${file}",
+						"workspaceFolders": "${command:jardis.workspaceFolders}",
+						"env": "${config:jardis.env}",
+						"user": "${config:jardis.user}",
+						"password": "${config:jardis.password}",
+						"osUser": "${command:jardis.osUser}"
+					},
+					{
+						"type": "jardis",
+						"request": "attach",
+						"name": "Jardis attach",
+						"program": "${file}",
+						"workspaceFolders": "${command:jardis.workspaceFolders}",
+						"env": "${config:jardis.env}",
+						"user": "${config:jardis.user}",
+						"password": "${config:jardis.password}",
+						"osUser": "${command:jardis.osUser}"
+					}
+				]
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.2.2",
+		"@types/node": "14.x",
+		"@types/vscode": "^1.57.0",
+		"@typescript-eslint/eslint-plugin": "^4.26.0",
+		"@typescript-eslint/parser": "^4.26.0",
+		"eslint": "^7.27.0",
+		"glob": "^7.1.7",
+		"mocha": "^8.4.0",
+		"typescript": "^4.3.2",
+		"vscode-test": "^1.5.2"
+	},
+	"dependencies": {
+		"vsce": "^2.6.5",
+		"vscode-languageclient": "^7.0.0"
+	}
+}
