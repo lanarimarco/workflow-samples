@@ -9,7 +9,7 @@ jobs:
         with:
           node-version: '16.15.1'
       - name: Install NPM dependencies    
-      - run: |
+        run: |
           npm install vsce
           npm install
         working-directory: jardis-client
