@@ -11,5 +11,7 @@ jobs:
       - run: npm install -g vsce
       # - run: ls
       #   working-directory: jardis-client
+      - run: npm install
+        working-directory: jardis-client
       - run: vsce package
         working-directory: jardis-client
