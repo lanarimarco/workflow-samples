@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'develop'
-      - 'releases/**'
 jobs:
   deploy-jardis-client:
     runs-on: ubuntu-latest
